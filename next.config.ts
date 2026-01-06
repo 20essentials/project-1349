@@ -1,19 +1,17 @@
 import type { NextConfig } from 'next';
 
 const cspHeader = `
-  default-src 'self';
-   cript-src * 'unsafe-inline' 'unsafe-eval' blob: data:;
-  style-src 'self' 'unsafe-inline';
-  img-src 'self' blob: data:;
-  font-src 'self';
+  default-src *;
+  script-src * 'unsafe-inline' 'unsafe-eval' blob: data:;
+  style-src * 'unsafe-inline';
+  img-src * blob: data:;
+  font-src *;
   object-src 'none';
-  base-uri 'self';
-  form-action 'self';
-  frame-ancestors 'none';
+  base-uri *;
+  form-action *;
+  frame-ancestors *;
   upgrade-insecure-requests;
-`
-  .replace(/\s{2,}/g, ' ')
-  .trim();
+`.replace(/\s{2,}/g, " ").trim();
 
 const nextConfig: NextConfig = {
   reactCompiler: true,
