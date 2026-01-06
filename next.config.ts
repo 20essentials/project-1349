@@ -1,9 +1,8 @@
-import type { NextConfig } from "next";
-const isDev = process.env.NODE_ENV !== "production";
+import type { NextConfig } from 'next';
 
 const cspHeader = `
   default-src 'self';
-  script-src 'self' ${isDev ? "'unsafe-eval' 'unsafe-inline'" : ""};
+   cript-src * 'unsafe-inline' 'unsafe-eval' blob: data:;
   style-src 'self' 'unsafe-inline';
   img-src 'self' blob: data:;
   font-src 'self';
@@ -13,7 +12,7 @@ const cspHeader = `
   frame-ancestors 'none';
   upgrade-insecure-requests;
 `
-  .replace(/\s{2,}/g, " ")
+  .replace(/\s{2,}/g, ' ')
   .trim();
 
 const nextConfig: NextConfig = {
@@ -22,16 +21,16 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
-        source: "/(.*)",
+        source: '/(.*)',
         headers: [
           {
-            key: "Content-Security-Policy",
-            value: cspHeader,
-          },
-        ],
-      },
+            key: 'Content-Security-Policy',
+            value: cspHeader
+          }
+        ]
+      }
     ];
-  },
+  }
 };
 
 export default nextConfig;
